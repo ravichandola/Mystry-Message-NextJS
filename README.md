@@ -8,12 +8,14 @@ A modern Next.js application for secure message handling and email communication
 - **Type Safety**: Full TypeScript support
 - **Styling**: Tailwind CSS for modern, responsive design
 - **Email Integration**: React Email for beautiful email templates
-- **Authentication**: Secure user authentication with bcryptjs
+- **Authentication**: Secure user authentication with NextAuth.js and bcryptjs
+- **Email Verification**: Built-in email verification system
 - **Database**: MongoDB integration with Mongoose
 - **Validation**: Data validation using Zod
 - **Performance**: Uses Turbopack for faster development
 - **Font Optimization**: Optimized font loading with next/font
 - **Dark Mode**: Built-in dark mode support
+- **Message Management**: User-controlled message acceptance system
 
 ## 📋 Prerequisites
 
@@ -21,6 +23,7 @@ Before you begin, ensure you have the following installed:
 
 - Node.js (Latest LTS version recommended)
 - npm or yarn or pnpm or bun
+- MongoDB (local or cloud instance)
 
 ## 🛠 Installation
 
@@ -44,7 +47,14 @@ Before you begin, ensure you have the following installed:
    ```
 
 3. Set up environment variables:
-   Create a `.env.local` file in the root directory and add necessary environment variables.
+   Create a `.env.local` file in the root directory and add the following environment variables:
+
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   RESEND_API_KEY=your_resend_api_key
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXTAUTH_URL=http://localhost:3000
+   ```
 
 ## 🚀 Development
 
@@ -73,6 +83,7 @@ mystry-message/
 │   ├── lib/          # Library code and configurations
 │   ├── schemas/      # Zod validation schemas
 │   ├── model/        # MongoDB models
+│   ├── context/      # React context providers
 │   └── emails/       # Email templates
 ├── public/           # Static assets
 └── ...config files
@@ -89,20 +100,23 @@ mystry-message/
 
 This project implements several security best practices:
 
+- NextAuth.js for secure authentication
 - Password hashing with bcryptjs
+- Email verification system
 - Type-safe database operations
 - Input validation with Zod
-- Secure email handling
+- Secure email handling with Resend
+- Message acceptance control
 
 ## 📚 Tech Stack
 
 - **Framework**: Next.js 15
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
+- **Authentication**: NextAuth.js
 - **Database**: MongoDB with Mongoose
 - **Email**: React Email & Resend
 - **Validation**: Zod
-- **Authentication**: bcryptjs
+- **Styling**: Tailwind CSS
 - **Development**: Turbopack
 - **Linting**: ESLint
 

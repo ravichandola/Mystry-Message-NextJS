@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+// This schema defines the validation rules for signing up
+// It validates:
+// - username: A required string field that must be:
+//   - At least 3 characters long
+//   - No more than 20 characters long
+//   - Only contain letters and numbers
 export const usernameValidation = z
   .string()
   .min(3, "username must be at least 3 characters long")
