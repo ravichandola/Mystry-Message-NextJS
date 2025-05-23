@@ -1,22 +1,25 @@
+// Import required dependencies from mongoose
 import mongoose, { Schema, Document } from "mongoose";
 
+// Interface representing a message document
 export interface Message extends Document {
-  content: string;
-  createdAt: Date;
+  content: string; // The content of the message
+  createdAt: Date; // Timestamp when message was created
 }
 
-// Add username to the User interface since it's defined in the schema
+// Interface representing a user document with all properties
 export interface User extends Document {
-  username: string;
-  email: string;
-  password: string;
-  verifyCode: string;
-  verifyCodeExpiry: Date;
-  isVerified: boolean;
-  isAcceptingMessages: boolean;
-  messages: Message[];
+  username: string; // Unique username for the user
+  email: string; // User's email address
+  password: string; // Hashed password
+  verifyCode: string; // Code sent for email verification
+  verifyCodeExpiry: Date; // Expiration timestamp for verify code
+  isVerified: boolean; // Whether email is verified
+  isAcceptingMessages: boolean; // Whether user accepts new messages
+  messages: Message[]; // Array of messages received by user
 }
 
+// Schema definition for Message subdocument
 const MessageSchema: Schema<Message> = new Schema({
   content: {
     type: String,
@@ -25,21 +28,22 @@ const MessageSchema: Schema<Message> = new Schema({
   createdAt: {
     type: Date,
     required: true,
-    default: Date.now,
+    default: Date.now, // Automatically set to current timestamp
   },
 });
 
+// Main User schema definition
 const UserSchema: Schema<User> = new Schema({
   username: {
     type: String,
     required: [true, "Username is required"],
-    trim: true,
-    unique: true,
+    trim: true, // Remove whitespace from both ends
+    unique: true, // Ensure usernames are unique
   },
   email: {
     type: String,
     required: [true, "Email is required"],
-    unique: true,
+    unique: true, // Ensure emails are unique
     match: [
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Please enter a valid email address",
@@ -59,18 +63,21 @@ const UserSchema: Schema<User> = new Schema({
   },
   isVerified: {
     type: Boolean,
-    default: false,
+    default: false, // Users start unverified
   },
   isAcceptingMessages: {
     type: Boolean,
-    default: false,
+    default: false, // Users start with messages disabled
   },
   messages: {
     type: [MessageSchema],
-    default: [],
+    default: [], // Start with empty messages array
   },
 });
 
+// Create or retrieve the User model
+// This prevents model recompilation errors in development
+//You cannot compile a model with the same name more than once.
 const User =
   (mongoose.models.User as mongoose.Model<User>) ||
   mongoose.model<User>("User", UserSchema);
