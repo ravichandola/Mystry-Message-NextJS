@@ -287,7 +287,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ### 🎉 Conclusion
 
-Implementing custom authentication with Auth.js, especially with custom callbacks and type modifications, requires careful attention to detail. However, by breaking it down into these components, the process becomes much more manageable. Always refer to the [official documentation](https://authjs.dev/) and review your code diligently to ensure a robust and secure authentication system.
+Implementing custom authentication with NextAuth.js, especially with custom callbacks and type modifications, requires careful attention to detail. However, by breaking it down into these components, the process becomes much more manageable. Always refer to the [official documentation](https://next-auth.js.org/) and review your code diligently to ensure a robust and secure authentication system.
 
 ---
 
